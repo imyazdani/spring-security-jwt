@@ -9,9 +9,9 @@ import com.example.springsecurityjwt.repository.UserRepository;
 import com.example.springsecurityjwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -33,7 +33,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private UserEntity getUser(String username) {
+    private UserDetails getUser(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return getUser(username);
     }
 }

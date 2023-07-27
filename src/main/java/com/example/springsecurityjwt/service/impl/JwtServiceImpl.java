@@ -27,15 +27,18 @@ public class JwtServiceImpl implements JwtService {
         return extractClaim(jwt, Claims::getSubject);
     }
 
+    @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimResolver){
         final Claims claims = extractAllClaims(token);
         return claimResolver.apply(claims);
     }
 
+    @Override
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(), userDetails);
     }
 
+    @Override
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails
@@ -50,6 +53,7 @@ public class JwtServiceImpl implements JwtService {
                 .compact();
     }
 
+    @Override
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
