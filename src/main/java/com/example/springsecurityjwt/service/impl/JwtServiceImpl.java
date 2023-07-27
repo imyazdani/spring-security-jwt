@@ -20,7 +20,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
-    private static final String SECRET_KEY = "KeJdepsH9eA1DVFZLKSOfjTsk2goJaXN";
+    private static final String SECRET_KEY = "b55791588ea0e9ee33f8406ac152bc0b823191b15f37adf24de06e3cefda7a48";
 
     @Override
     public String extractUsername(String jwt) {
