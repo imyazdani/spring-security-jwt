@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  app:
+    depends_on:
+      - mysqldb
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/spring_jwt?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - springjwt-net
+
+  mysqldb:
+    image: "mysql:8.0"
+    ports:
+      - "3306:3306"
+    networks:
+      - springjwt-net
+    environment:
+      MYSQL_DATABASE: spring_jwt
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+networks:
+  springjwt-net:
+    driver: bridge
+volumes:
+  db_data:
+    driver: local
