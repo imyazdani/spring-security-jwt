@@ -1,4 +1,4 @@
-# Spring Boot 3 Security (Jwt)
+# Spring Boot 3 Security (JWT)
 This is a spring project based on `Spring Boot 3`, `Spring Security 6` and `JWT Token` that implement the security for a REST API web service.
 Every user has to be authenticated and authorized with JWT token that able to work with APIs.
 
